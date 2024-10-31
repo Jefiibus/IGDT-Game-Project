@@ -12,7 +12,7 @@ public class MiningLaser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        line.positionCount = 2;
+        
     }
 
     // Update is called once per frame
@@ -25,11 +25,13 @@ public class MiningLaser : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(1))
         {
-            CancelInvoke("CancelBeam");
+            CancelInvoke("FireBeam");
+            CancelBeam();
         }
     }
     void FireBeam()
     {
+        line.positionCount = 2;
         Vector2 playerPosition = playerObj.transform.position;
         Vector2 lineEndPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Debug.Log("Firing laser");
@@ -42,7 +44,8 @@ public class MiningLaser : MonoBehaviour
     }
     void CancelBeam()
     {
-        line.enabled = false;
         line.positionCount = 0;
+        line.enabled = false;
+        
     }
 }

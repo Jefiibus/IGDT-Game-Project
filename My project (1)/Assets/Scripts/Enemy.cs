@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed = 2f;
-    public float chaseRange = 20f;
+    private float chaseRange = 10f;
     private Rigidbody2D enemyRb;
     private GameObject player;
 
