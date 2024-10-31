@@ -9,6 +9,7 @@ public class Aim : MonoBehaviour
     public float fireDelay = 0.2f;
     public float preventSpamfire = 0.5f;
     public Camera playerCam;
+    public float rotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +19,10 @@ public class Aim : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(new Vector3(playerCam.ScreenToWorldPoint(Input.mousePosition).x, playerCam.ScreenToWorldPoint(Input.mousePosition).y, 0));
-        Debug.Log(playerCam.ScreenToWorldPoint(Input.mousePosition));
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = mousePosition - transform.position;
+        float angle = Vector2.SignedAngle(Vector2.right, direction);
+        transform.eulerAngles = new Vector3(0, 0, angle);
 
         //starts firing on button downpress, firing a bullet every n seconds, this delay is also applied to the first shot as otherwise you could use a macro to spam lmb
         if (fireDelay <= preventSpamfire && Input.GetMouseButtonDown(0))
@@ -43,6 +46,6 @@ public class Aim : MonoBehaviour
         //instantiates the bullet, turns it in the right direction and plays sound+gunsmoke
         GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
         bullet.transform.Rotate(0, Random.Range(-spread, spread) + 180f, 0);
-        bullet.transform.Translate(Vector3.forward);
+        bullet.transform.Translate(Vector3.zero);
     }
 }

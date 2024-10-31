@@ -16,7 +16,7 @@ public class Boolet : MonoBehaviour
     void Update()
     {
         //goes forward at a set speed
-        transform.Translate(Vector3.forward * Time.deltaTime * bulletSpeed);
+        transform.Translate(Vector2.left * Time.deltaTime * bulletSpeed);
 
         //destroys itself once out of bounds
         if (Mathf.Abs(transform.position.x) > 500 || Mathf.Abs(transform.position.z) > 500)
