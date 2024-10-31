@@ -32,12 +32,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        if (other.gameObject.CompareTag("Player"))
+        damageable damageable = collision.gameObject.GetComponent<damageable>();
+        if (collision.gameObject.CompareTag("Player") && damageable.Health != 0)
         {
+            damageable.Hit(1);
             Debug.Log("Player hit");
+        }
+        if (collision.gameObject.CompareTag("Player") && damageable.Health == 0) 
+        {
+            damageable.IsAlive = false;
         }
     }
 }

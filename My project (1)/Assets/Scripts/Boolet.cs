@@ -26,14 +26,24 @@ public class Boolet : MonoBehaviour
 
         
     }
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        if (other.gameObject.CompareTag("Enemy"))
+        damageable damageable = collision.gameObject.GetComponent<damageable>();
+        if (collision.gameObject.CompareTag("Enemy") && damageable.Health != 0)
         {
             Destroy(this.gameObject);
-            Destroy(other.gameObject);
+            damageable.Hit(1);
             Debug.Log("Hit enemy");
+        }
+        else if (collision.gameObject.CompareTag("Asteroid"))
+        { 
+            Destroy(this.gameObject); 
+        }
+        if (collision.gameObject.CompareTag("Enemy") && damageable.Health == 0) 
+        {
+            Destroy(this.gameObject);
+            Destroy(collision.gameObject);
+            Debug.Log("Enemy Destroyed");
         }
     }
 
