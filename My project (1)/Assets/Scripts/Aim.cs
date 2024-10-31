@@ -5,7 +5,7 @@ using UnityEngine;
 public class Aim : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public float spread = 15f;
+    public float spread = 0f;
     public float fireDelay = 0.2f;
     public float preventSpamfire = 0.5f;
     public Camera playerCam;
@@ -45,7 +45,7 @@ public class Aim : MonoBehaviour
     {
         //instantiates the bullet, turns it in the right direction and plays sound+gunsmoke
         GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-        bullet.transform.Rotate(0, Random.Range(-spread, spread) + 180f, 0);
+        bullet.transform.Rotate(0, 180f, 0);
         bullet.transform.Translate(Vector3.zero);
     }
 }

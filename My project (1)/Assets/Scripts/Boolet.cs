@@ -23,6 +23,18 @@ public class Boolet : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        
+    }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(this.gameObject);
+            Destroy(other.gameObject);
+            Debug.Log("Hit enemy");
+        }
     }
 
     //void OnCollisionEnter(Collision collision)
