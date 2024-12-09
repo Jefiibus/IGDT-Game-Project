@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public string left = "a";
     public string right = "d";
     public float speed = 1.0f;
+    
+    public float score = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,5 +39,10 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector2.right * Time.deltaTime * speed);
         }
 
+    }
+    public void AddScore(int amount)
+    {
+        score += amount;
+        Debug.Log("Player score: " + score);
     }
 }

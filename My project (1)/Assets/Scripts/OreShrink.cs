@@ -9,10 +9,13 @@ public class OreShrink : MonoBehaviour
     public float minSize = 0.5f;   
 
     private bool isShrinking = false;
+    private float shrinkTimer = 0f;
+    public int scorePerSecond = 10;
+    private PlayerController playerControllerScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerControllerScript = GameObject.Find("PlayerObject").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -30,6 +33,13 @@ public class OreShrink : MonoBehaviour
                 Mathf.Max(newScale.z, 0)
             );
             transform.localScale = newScale;
+
+            shrinkTimer += Time.deltaTime;
+            if (shrinkTimer >= 0.1f)
+            {
+                playerControllerScript.AddScore(scorePerSecond);
+                shrinkTimer = 0f;
+            }
 
             if (transform.localScale.x <= minSize && transform.localScale.y <= minSize && transform.localScale.z <= minSize)
             {
