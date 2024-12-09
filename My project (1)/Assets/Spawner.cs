@@ -5,9 +5,16 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
-    public float[] spawnArea = { -27f, 27f };
+    public float spawnLimit = 27f;
+    private float[] spawnArea = { -27f, 27f };
     public GameObject player;
     public float lastTime = 0f;
+
+    void Start()
+    {
+        spawnArea[0] = -spawnLimit;
+        spawnArea[1] = spawnLimit;
+    }
 
     // Update is called once per frame
     void Update()
