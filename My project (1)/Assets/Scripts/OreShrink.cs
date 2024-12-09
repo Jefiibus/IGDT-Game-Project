@@ -11,17 +11,19 @@ public class OreShrink : MonoBehaviour
     private bool isShrinking = false;
     private float shrinkTimer = 0f;
     public int scorePerSecond = 10;
+    private int randomSpin;
     private PlayerController playerControllerScript;
     // Start is called before the first frame update
     void Start()
     {
         playerControllerScript = GameObject.Find("PlayerObject").GetComponent<PlayerController>();
+        randomSpin = Random.Range(-10,10);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0,0,10*Time.deltaTime);
+        transform.Rotate(0,0,randomSpin*Time.deltaTime);
         if (isShrinking)
         {
             Vector3 newScale = transform.localScale - Vector3.one * shrinkRate * Time.deltaTime;
