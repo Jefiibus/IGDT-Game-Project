@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8821124301857696734}
   - component: {fileID: 1310390826724166889}
-  - component: {fileID: 3673378936186023668}
+  - component: {fileID: 7045481836469934598}
+  - component: {fileID: 6754896072470339104}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Asteroid
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
+  m_Sprite: {fileID: 21300006, guid: 1bd6c74c058d5f143a391104c445e845, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,8 +86,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &3673378936186023668
-CircleCollider2D:
+--- !u!114 &7045481836469934598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948225193859880625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea13d310d00865548960277570d5e5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shrinkRate: 1.5
+  minSize: 0.5
+--- !u!60 &6754896072470339104
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -118,5 +133,37 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.14, y: 1.74}
+    newSize: {x: 1, y: 0.8828125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.65, y: -0.83}
+      - {x: 1.0699999, y: -0.32999998}
+      - {x: 1.0845946, y: 0.02290935}
+      - {x: 0.8467569, y: 0.33613145}
+      - {x: 0.44081095, y: 0.58710134}
+      - {x: 0.22999999, y: 0.66999996}
+      - {x: 0.17, y: 0.87}
+      - {x: -0.14999999, y: 0.87}
+      - {x: -0.18513516, y: 0.7809696}
+      - {x: -0.56567574, y: 0.7803232}
+      - {x: -0.635946, y: 0.69548494}
+      - {x: -0.62567574, y: 0.60516155}
+      - {x: -0.8465318, y: 0.34625325}
+      - {x: -1.035946, y: 0.19064654}
+      - {x: -1.0954913, y: 0.042031817}
+      - {x: -1.0262163, y: -0.4409698}
+      - {x: -0.9348649, y: -0.6258081}
+      - {x: -0.78320754, y: -0.5998195}
+      - {x: -0.71, y: -0.78999996}
+      - {x: -0.5424327, y: -0.88451517}
+      - {x: -0.22894998, y: -0.86119014}
+      - {x: 0.55, y: -0.87}
+  m_UseDelaunayMesh: 0

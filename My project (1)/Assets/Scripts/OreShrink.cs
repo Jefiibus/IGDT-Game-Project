@@ -18,6 +18,7 @@ public class OreShrink : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.Rotate(0,0,10*Time.deltaTime);
         if (isShrinking)
         {
             Vector3 newScale = transform.localScale - Vector3.one * shrinkRate * Time.deltaTime;

@@ -21,7 +21,7 @@ public class Aim : MonoBehaviour
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePosition - transform.position;
-        float angle = Vector2.SignedAngle(Vector2.right, direction);
+        float angle = Vector2.SignedAngle(Vector2.up, direction);
         transform.eulerAngles = new Vector3(0, 0, angle);
 
         //starts firing on button downpress, firing a bullet every n seconds, this delay is also applied to the first shot as otherwise you could use a macro to spam lmb
@@ -46,6 +46,6 @@ public class Aim : MonoBehaviour
         //instantiates the bullet, turns it in the right direction and plays sound+gunsmoke
         GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
         bullet.transform.Rotate(0, 180f, 0);
-        bullet.transform.Translate(Vector3.zero);
+        bullet.transform.Translate(Vector3.up);
     }
 }
