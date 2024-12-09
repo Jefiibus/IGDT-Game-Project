@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     private float chaseRange = 10f;
     private Rigidbody2D enemyRb;
     private GameObject player;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +28,10 @@ public class Enemy : MonoBehaviour
             {
                 Vector2 lookDirection = (player.transform.position - transform.position).normalized;
                 transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+                float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg-90;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             }
+          
         }
     }
 
