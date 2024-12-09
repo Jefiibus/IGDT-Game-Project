@@ -8,12 +8,18 @@ public class Spawner : MonoBehaviour
     public float spawnLimit = 27f;
     private float[] spawnArea = { -27f, 27f };
     public GameObject player;
+    public GameObject asteroidPrefab;
+    public int objectCount;
+    public Vector2 areaSize = new Vector2(100,100);
+    public float minDistance = 15f;
+    private List<Vector2> spawnedPositions = new List<Vector2>();
     public float lastTime = 0f;
 
     void Start()
     {
         spawnArea[0] = -spawnLimit;
         spawnArea[1] = spawnLimit;
+        SpawnAsteroidField();
     }
 
     // Update is called once per frame
@@ -39,5 +45,54 @@ public class Spawner : MonoBehaviour
             //sets the lastTime variable to when the random check was last processed
             lastTime = ScoreManager.timeFromStart;
         }
+    }
+
+    public void SpawnAsteroidField()
+    {
+        spawnedPositions.Add(new Vector2(0,0));
+        for (int i = 0; i < objectCount; i++)
+        {
+            int attempts = 0;
+            bool validPositionFound = false;
+            Vector2 spawnPosition = Vector2.zero;
+
+            while (!validPositionFound && attempts < 100)
+            {
+                attempts++;
+                spawnPosition = GetRandomPosition();
+
+                if (IsPositionValid(spawnPosition))
+                {
+                    validPositionFound = true;
+                }
+            }
+
+            if (validPositionFound)
+            {
+                spawnedPositions.Add(spawnPosition);
+                Instantiate(asteroidPrefab, spawnPosition, Quaternion.identity);
+            }
+            else
+            {
+                Debug.Log("Could not find a valid position for object " + (i + 1));
+            }
+        }
+    }
+    Vector2 GetRandomPosition()
+    {
+        float x = Random.Range(-areaSize.x / 2, areaSize.x / 2);
+        float y = Random.Range(-areaSize.y / 2, areaSize.y / 2);
+        return new Vector2(x, y);
+    }
+    bool IsPositionValid(Vector2 position)
+    {
+        foreach (Vector2 spawnedPosition in spawnedPositions)
+        {
+            if (Vector2.Distance(position, spawnedPosition) < minDistance)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
