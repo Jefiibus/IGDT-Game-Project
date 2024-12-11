@@ -7,15 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
-    public GameObject startScreenUI; 
-    
-
+    public GameObject startScreenUI;
+    private FadeToWhite fadeToWhiteScript;
+    private GameObject image;
     // Start is called before the first frame update
     void Start()
     {
-        
         startScreenUI.SetActive(true);  // Show the start menu
-
+        fadeToWhiteScript = GameObject.Find("FadeToWhite").GetComponent<FadeToWhite>();
+        image = GameObject.Find("FadeToWhite");
+   
     }
 
     // Update is called once per frame
@@ -27,9 +28,15 @@ public class StartGame : MonoBehaviour
     // Call this method to resume the game
     public void ResumeGame()
     {
+
+        StartCoroutine(FadeToWhite());
+    }
+    IEnumerator FadeToWhite()
+    {
+        fadeToWhiteScript.FadeIn();
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene("SampleScene");
     }
-
     // Call this method to quit the game
     public void QuitGame()
     {
