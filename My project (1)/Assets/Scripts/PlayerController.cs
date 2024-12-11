@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> backgrounds;
     private GameObject currentBackground;
     private bool readyToWarp = true;
+    private bool sonarReady = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,8 +48,10 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector2.right * Time.deltaTime * speed);
         }
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetKey(KeyCode.Space) && sonarReady)
         {
+            StartCoroutine(SonarCooldown());
+            sonarReady = false;
             GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
             foreach (GameObject asteroid in asteroids)
         {
@@ -63,6 +66,11 @@ public class PlayerController : MonoBehaviour
             readyToWarp = false;
         }
 
+    }
+    IEnumerator SonarCooldown()
+    {
+        yield return new WaitForSeconds(3);
+        sonarReady = true;
     }
     IEnumerator FadeToWhite()
     {

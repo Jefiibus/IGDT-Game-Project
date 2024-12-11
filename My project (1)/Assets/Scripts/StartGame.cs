@@ -15,7 +15,6 @@ public class StartGame : MonoBehaviour
     {
         
         startScreenUI.SetActive(true);  // Show the start menu
-        Time.timeScale = 0f;          // Pause the game by setting timescale to 0
 
     }
 
@@ -28,9 +27,7 @@ public class StartGame : MonoBehaviour
     // Call this method to resume the game
     public void ResumeGame()
     {
-        
-        startScreenUI.SetActive(false); // Hide the pause menu
-        Time.timeScale = 1f;          // Resume the game by setting timescale to 1
+        SceneManager.LoadScene("SampleScene");
     }
 
     // Call this method to quit the game
