@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +16,15 @@ public class PlayerController : MonoBehaviour
     private Spawner spawnerScript;
     private OreShrink oreShrinkScript;
     private FadeToWhite fadeToWhiteScript;
+    public List<GameObject> backgrounds;
+    private GameObject currentBackground;
+    private bool readyToWarp = true;
     // Start is called before the first frame update
     void Start()
     {
         spawnerScript = GameObject.Find("SpawnManager").GetComponent<Spawner>();
         fadeToWhiteScript = GameObject.Find("FadeToWhite").GetComponent<FadeToWhite>();
+        currentBackground = backgrounds.Find(bg => bg.activeSelf);
     }
     
     
@@ -52,9 +57,10 @@ public class PlayerController : MonoBehaviour
         }
         }
         
-        if (score>=lastScore && Input.GetKey(KeyCode.E))
+        if (score>=lastScore && Input.GetKey(KeyCode.E) && readyToWarp)
         {
             StartCoroutine(FadeToWhite());
+            readyToWarp = false;
         }
 
     }
@@ -66,6 +72,7 @@ public class PlayerController : MonoBehaviour
         NextLevel();
         yield return new WaitForSeconds(1);
         fadeToWhiteScript.FadeOut();
+        readyToWarp = true;
     }
     public void AddScore(int amount)
     {
@@ -86,7 +93,16 @@ public class PlayerController : MonoBehaviour
             Destroy(enemy);
         }
         transform.position = new Vector2(0,0);
-        
+
         spawnerScript.SpawnAsteroidField();
+        
+        GameObject newBackground;
+        do
+        {
+            newBackground = backgrounds[Random.Range(0, backgrounds.Count)];
+        } while (newBackground == currentBackground);
+        currentBackground.SetActive(false);
+        newBackground.SetActive(true);
+        currentBackground = newBackground;
     }
 }

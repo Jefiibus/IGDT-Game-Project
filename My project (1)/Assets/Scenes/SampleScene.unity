@@ -173,7 +173,7 @@ MonoBehaviour:
   - {fileID: 3948225193859880625, guid: cd3196fdc5d375f4f89054fdd5751bca, type: 3}
   - {fileID: 6881845465825017189, guid: 21ee9a785c00e3447bfd155557ab84e1, type: 3}
   - {fileID: 8777637268899327668, guid: 4ea5f0f1fdf5dc54a8be7f406d3b18d0, type: 3}
-  objectCount: 15
+  objectCount: 30
   areaSize: {x: 100, y: 100}
   minDistance: 15
   lastTime: 0
@@ -1155,6 +1155,10 @@ MonoBehaviour:
   speed: 7
   score: 0
   lastScore: 1000
+  backgrounds:
+  - {fileID: 1275982700}
+  - {fileID: 647901564}
+  - {fileID: 302864534}
 --- !u!4 &1341726692
 Transform:
   m_ObjectHideFlags: 0
