@@ -9,12 +9,14 @@ public class Enemy : MonoBehaviour
     public float chaseRange = 10f;
     private Rigidbody2D enemyRb;
     private GameObject player;
+    private PlayerController playerControllerScript;
     
     // Start is called before the first frame update
     void Start()
     {
         enemyRb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
+        playerControllerScript = GameObject.Find("PlayerObject").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -38,12 +40,12 @@ public class Enemy : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         damageable damageable = collision.gameObject.GetComponent<damageable>();
-        if (collision.gameObject.CompareTag("Player") && damageable.Health != 0)
+        if (collision.gameObject.CompareTag("Player") && damageable.Health != 0 && playerControllerScript.iFrames)
         {
             damageable.Hit(1);
             Debug.Log("Player hit");
         }
-        if (collision.gameObject.CompareTag("Player") && damageable.Health == 0) 
+        if (collision.gameObject.CompareTag("Player") && damageable.Health == 0 && playerControllerScript.iFrames) 
         {
             damageable.IsAlive = false;
         }

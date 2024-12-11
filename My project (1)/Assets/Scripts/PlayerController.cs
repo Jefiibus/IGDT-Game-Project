@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private GameObject currentBackground;
     private bool readyToWarp = true;
     private bool sonarReady = true;
+    public bool iFrames = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
         warpCountdown.text = "1";
         yield return new WaitForSeconds(1);
+        iFrames = false;
         warpCountdown.text = "";
         warpText.text = "";
         fadeToWhiteScript.FadeIn();
@@ -94,6 +96,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
         fadeToWhiteScript.FadeOut();
         readyToWarp = true;
+        iFrames = true;
     }
     public void AddScore(int amount)
     {
