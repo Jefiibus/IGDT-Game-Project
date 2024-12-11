@@ -29,10 +29,12 @@ public class Boolet : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         damageable damageable = collision.gameObject.GetComponent<damageable>();
+        Enemy chaserange = collision.gameObject.GetComponent<Enemy>();
         if (collision.gameObject.CompareTag("Enemy") && damageable.Health != 0)
         {
             Destroy(this.gameObject);
             damageable.Hit(1);
+            chaserange.chaseRange = 900;
             Debug.Log("Hit enemy");
         }
         else if (collision.gameObject.CompareTag("Asteroid"))
