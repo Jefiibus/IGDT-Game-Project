@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     public float spawnLimit = 27f;
     private float[] spawnArea = { -27f, 27f };
     public GameObject player;
-    public GameObject asteroidPrefabs;
+    public GameObject[] asteroidPrefabs;
     public int objectCount;
     public Vector2 areaSize = new Vector2(100,100);
     public float minDistance = 15f;
@@ -75,7 +75,7 @@ public class Spawner : MonoBehaviour
             if (validPositionFound)
             {
                 spawnedPositions.Add(spawnPosition);
-                Instantiate(asteroidPrefabs, spawnPosition, Quaternion.identity);
+                Instantiate(asteroidPrefabs[Random.Range(0,asteroidPrefabs.Length)], spawnPosition, Quaternion.identity);
             }
             else
             {
