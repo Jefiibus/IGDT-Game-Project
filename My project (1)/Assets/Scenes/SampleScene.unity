@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 5805183202432945319, guid: 0f2f511bc3925504d9c67ddfa280ff18, type: 3}
-  spawnLimit: 50
+  spawnLimit: 27
   player: {fileID: 1341726690}
   asteroidPrefabs: {fileID: 3948225193859880625, guid: cd3196fdc5d375f4f89054fdd5751bca, type: 3}
   objectCount: 15

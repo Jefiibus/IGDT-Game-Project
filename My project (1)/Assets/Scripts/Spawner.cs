@@ -18,12 +18,15 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        spawnArea[0] = -spawnLimit;
-        spawnArea[1] = spawnLimit;
         playerControllerScript = GameObject.Find("PlayerObject").GetComponent<PlayerController>();
         SpawnAsteroidField();
     }
-
+    public void FixedUpdate()
+    {
+        spawnLimit = Random.Range(20f, 30f);
+        spawnArea[0] = -spawnLimit;
+        spawnArea[1] = spawnLimit;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -36,13 +39,13 @@ public class Spawner : MonoBehaviour
                 //this part decides where to spawn the enemy, the spawner itself teleports to a position outside of where the player can see and creates an enemy at its own position
                 if (Random.Range(0, 2) == 0)
                 {
-                    transform.position = player.transform.position + new Vector3(spawnArea[Random.Range(0, 2)], 0, Random.Range(spawnArea[0], spawnArea[1]));
+                    transform.position = player.transform.position + new Vector3(spawnArea[Random.Range(0, 2)], Random.Range(spawnArea[0], spawnArea[1]),0);
                 }
                 else
                 {
-                    transform.position = player.transform.position + new Vector3(Random.Range(spawnArea[0], spawnArea[1]), 0, spawnArea[Random.Range(0, 2)]);
+                    transform.position = player.transform.position + new Vector3(Random.Range(spawnArea[0], spawnArea[1]), spawnArea[Random.Range(0, 2)],0);
                 }
-                Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], new Vector3(transform.position.x, 0.3f, transform.position.z), transform.rotation);
+                Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
             }
             //sets the lastTime variable to when the random check was last processed
             lastTime = ScoreManager.timeFromStart;
