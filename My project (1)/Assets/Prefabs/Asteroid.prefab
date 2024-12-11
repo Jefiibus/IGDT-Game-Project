@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1310390826724166889}
   - component: {fileID: 7045481836469934598}
   - component: {fileID: 6754896072470339104}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Asteroid
   m_TagString: Asteroid
   m_Icon: {fileID: 0}
@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shrinkRate: 1.5
   minSize: 0.5
+  scorePerSecond: 10
+  sonarPing: {fileID: 4063913244853044785, guid: 4b813862476fd0b4598b699c7f708bd9, type: 3}
 --- !u!60 &6754896072470339104
 PolygonCollider2D:
   m_ObjectHideFlags: 0

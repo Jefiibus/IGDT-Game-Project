@@ -10,12 +10,14 @@ public class PlayerController : MonoBehaviour
     public string left = "a";
     public string right = "d";
     public float speed = 1.0f;
-    
-    public float score = 0;
+    public int score = 0;
+    public int lastScore = 1000;
+    private Spawner spawnerScript;
+    private OreShrink oreShrinkScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+        spawnerScript = GameObject.Find("SpawnManager").GetComponent<Spawner>();
     }
     
     
@@ -38,11 +40,42 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector2.right * Time.deltaTime * speed);
         }
+        if(Input.GetKey(KeyCode.Space))
+        {
+            GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+            foreach (GameObject asteroid in asteroids)
+        {
+            oreShrinkScript = asteroid.GetComponent<OreShrink>();
+            oreShrinkScript.FindPlayer();
+        }
+        }
+        
+        if (score>=lastScore && Input.GetKey(KeyCode.E))
+        {
+            NextLevel();
+        }
 
     }
     public void AddScore(int amount)
     {
         score += amount;
         Debug.Log("Player score: " + score);
+    }
+    public void NextLevel()
+    {
+        lastScore = score+1000;
+        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject asteroid in asteroids)
+        {
+            Destroy(asteroid);
+        }
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+        transform.position = new Vector2(0,0);
+        
+        spawnerScript.SpawnAsteroidField();
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class OreShrink : MonoBehaviour
@@ -13,10 +14,14 @@ public class OreShrink : MonoBehaviour
     public int scorePerSecond = 10;
     private int randomSpin;
     private PlayerController playerControllerScript;
+    private GameObject playerObj;
+    public GameObject sonarPing;
+    private float offsetDistance = 5f;
     // Start is called before the first frame update
     void Start()
     {
         playerControllerScript = GameObject.Find("PlayerObject").GetComponent<PlayerController>();
+        playerObj = GameObject.Find("PlayerObject");
         randomSpin = Random.Range(-10,10);
     }
 
@@ -56,5 +61,22 @@ public class OreShrink : MonoBehaviour
     public void StopMining()
     {
         isShrinking = false;
+    }
+    public void FindPlayer()
+    {
+        Vector2 playerPosition = playerObj.transform.position;
+        Vector2 asteroidPos = transform.position;
+        Vector2 direction = (asteroidPos - playerPosition).normalized;
+        Vector2 raycastStart = playerPosition + direction * offsetDistance;
+        int layerMask = ~LayerMask.GetMask("Ignore Raycast");
+
+        RaycastHit2D raycastHit = Physics2D.Raycast(raycastStart, direction,layerMask);
+
+        if (raycastHit)
+        {
+            Vector2 point = raycastHit.point;
+            Instantiate(sonarPing, point, Quaternion.identity);
+        }
+        
     }
 }

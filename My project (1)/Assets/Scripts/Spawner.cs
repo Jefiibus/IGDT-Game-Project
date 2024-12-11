@@ -8,17 +8,19 @@ public class Spawner : MonoBehaviour
     public float spawnLimit = 27f;
     private float[] spawnArea = { -27f, 27f };
     public GameObject player;
-    public GameObject asteroidPrefab;
+    public GameObject asteroidPrefabs;
     public int objectCount;
     public Vector2 areaSize = new Vector2(100,100);
     public float minDistance = 15f;
     private List<Vector2> spawnedPositions = new List<Vector2>();
     public float lastTime = 0f;
+    private PlayerController playerControllerScript;
 
     void Start()
     {
         spawnArea[0] = -spawnLimit;
         spawnArea[1] = spawnLimit;
+        playerControllerScript = GameObject.Find("PlayerObject").GetComponent<PlayerController>();
         SpawnAsteroidField();
     }
 
@@ -26,7 +28,7 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         //this caps checks to max. 10/s, it's not perfect, but better than checks=framerate
-        if (ScoreManager.timeFromStart - lastTime > 0.1f)
+        if (ScoreManager.timeFromStart - lastTime > 0.1f && playerControllerScript.score >= playerControllerScript.lastScore)
         {
             //causes the spawnrate to increase slowly with a bit of randomness
             if (Random.Range(50f, 150f + ScoreManager.timeFromStart) / 150f > 1f)
@@ -70,13 +72,14 @@ public class Spawner : MonoBehaviour
             if (validPositionFound)
             {
                 spawnedPositions.Add(spawnPosition);
-                Instantiate(asteroidPrefab, spawnPosition, Quaternion.identity);
+                Instantiate(asteroidPrefabs, spawnPosition, Quaternion.identity);
             }
             else
             {
                 Debug.Log("Could not find a valid position for object " + (i + 1));
             }
         }
+        spawnedPositions.Clear();
     }
     Vector2 GetRandomPosition()
     {

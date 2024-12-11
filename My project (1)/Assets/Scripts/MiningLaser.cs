@@ -41,9 +41,10 @@ public class MiningLaser : MonoBehaviour
         Vector2 raycastStart = playerPosition + direction * offsetDistance;
         //Debug.Log("Firing laser");
         line.enabled = true;
+        int layerMask = ~LayerMask.GetMask("Ignore Mining Laser");
 
         line.SetPosition(0, raycastStart);
-        RaycastHit2D raycastHit = Physics2D.Raycast(raycastStart, direction, maxDistance);
+        RaycastHit2D raycastHit = Physics2D.Raycast(raycastStart, direction, maxDistance, layerMask);
         if (raycastHit)
         {
             OreShrink shrinkable = raycastHit.collider.GetComponent<OreShrink>();
