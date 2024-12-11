@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI warpText;
     public string up = "w";
     public string down = "s";
     public string left = "a";
@@ -23,6 +26,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scoreText.text = "Score: " + score;
+        warpText.text = "";
         spawnerScript = GameObject.Find("SpawnManager").GetComponent<Spawner>();
         fadeToWhiteScript = GameObject.Find("FadeToWhite").GetComponent<FadeToWhite>();
         currentBackground = backgrounds.Find(bg => bg.activeSelf);
@@ -85,11 +90,17 @@ public class PlayerController : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
+        scoreText.text = "Score: " + score;
+        if (score >= lastScore)
+        {
+            warpText.text = "WARP READY";
+        }
         Debug.Log("Player score: " + score);
     }
     public void NextLevel()
     {
         lastScore = score+1000;
+        warpText.text = "";
         GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject asteroid in asteroids)
