@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI warpText;
+    public TextMeshProUGUI warpCountdown;
     public string up = "w";
     public string down = "s";
     public string left = "a";
@@ -79,7 +80,14 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator FadeToWhite()
     {
-        yield return new WaitForSeconds(3);
+        warpCountdown.text = "3";
+        yield return new WaitForSeconds(1);
+        warpCountdown.text = "2";
+        yield return new WaitForSeconds(1);
+        warpCountdown.text = "1";
+        yield return new WaitForSeconds(1);
+        warpCountdown.text = "";
+        warpText.text = "";
         fadeToWhiteScript.FadeIn();
         yield return new WaitForSeconds(1);
         NextLevel();
@@ -114,6 +122,7 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector2(0,0);
 
         spawnerScript.SpawnAsteroidField();
+        spawnerScript.SpawnEnemies();
         
         GameObject newBackground;
         do

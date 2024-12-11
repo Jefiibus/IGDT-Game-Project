@@ -102,6 +102,7 @@ MonoBehaviour:
   minSize: 0.5
   scorePerSecond: 10
   sonarPing: {fileID: 4063913244853044785, guid: 4b813862476fd0b4598b699c7f708bd9, type: 3}
+  pingSize: 1
 --- !u!60 &6754896072470339104
 PolygonCollider2D:
   m_ObjectHideFlags: 0

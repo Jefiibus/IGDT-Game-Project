@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    public GameObject[] enemyPrefabsForStart;
     public GameObject[] enemyPrefabs;
     public float spawnLimit = 27f;
     private float[] spawnArea = { -27f, 27f };
@@ -20,6 +21,7 @@ public class Spawner : MonoBehaviour
     {
         playerControllerScript = GameObject.Find("PlayerObject").GetComponent<PlayerController>();
         SpawnAsteroidField();
+        SpawnEnemies();
     }
     public void FixedUpdate()
     {
@@ -51,8 +53,16 @@ public class Spawner : MonoBehaviour
             lastTime = ScoreManager.timeFromStart;
         }
     }
-
     public void SpawnAsteroidField()
+    {
+        SpawnObjects(20, asteroidPrefabs, false);
+    }
+    public void SpawnEnemies()
+    {
+        SpawnObjects(20, enemyPrefabsForStart, true);
+    }
+
+    public void SpawnObjects(int objectCount, GameObject[] objectType, bool clearSpawn)
     {
         spawnedPositions.Add(new Vector2(0,0));
         for (int i = 0; i < objectCount; i++)
@@ -75,14 +85,17 @@ public class Spawner : MonoBehaviour
             if (validPositionFound)
             {
                 spawnedPositions.Add(spawnPosition);
-                Instantiate(asteroidPrefabs[Random.Range(0,asteroidPrefabs.Length)], spawnPosition, Quaternion.identity);
+                Instantiate(objectType[Random.Range(0,objectType.Length)], spawnPosition, Quaternion.identity);
             }
             else
             {
                 Debug.Log("Could not find a valid position for object " + (i + 1));
             }
         }
+        if (clearSpawn)
+        {
         spawnedPositions.Clear();
+        }
     }
     Vector2 GetRandomPosition()
     {

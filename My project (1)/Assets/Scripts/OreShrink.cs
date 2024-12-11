@@ -17,6 +17,7 @@ public class OreShrink : MonoBehaviour
     private GameObject playerObj;
     public GameObject sonarPing;
     private float offsetDistance = 5f;
+    public float pingSize;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,8 +76,8 @@ public class OreShrink : MonoBehaviour
         if (raycastHit)
         {
             Vector2 point = raycastHit.point;
-            Instantiate(sonarPing, point, Quaternion.identity);
+            GameObject newPing = Instantiate(sonarPing, point, Quaternion.identity);
+            newPing.transform.localScale = new Vector2(pingSize,pingSize);
         }
-        
     }
 }
