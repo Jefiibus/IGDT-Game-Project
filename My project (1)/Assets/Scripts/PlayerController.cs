@@ -14,10 +14,12 @@ public class PlayerController : MonoBehaviour
     public int lastScore = 1000;
     private Spawner spawnerScript;
     private OreShrink oreShrinkScript;
+    private FadeToWhite fadeToWhiteScript;
     // Start is called before the first frame update
     void Start()
     {
         spawnerScript = GameObject.Find("SpawnManager").GetComponent<Spawner>();
+        fadeToWhiteScript = GameObject.Find("FadeToWhite").GetComponent<FadeToWhite>();
     }
     
     
@@ -52,9 +54,18 @@ public class PlayerController : MonoBehaviour
         
         if (score>=lastScore && Input.GetKey(KeyCode.E))
         {
-            NextLevel();
+            StartCoroutine(FadeToWhite());
         }
 
+    }
+    IEnumerator FadeToWhite()
+    {
+        yield return new WaitForSeconds(3);
+        fadeToWhiteScript.FadeIn();
+        yield return new WaitForSeconds(1);
+        NextLevel();
+        yield return new WaitForSeconds(1);
+        fadeToWhiteScript.FadeOut();
     }
     public void AddScore(int amount)
     {
