@@ -8,6 +8,8 @@ public class FadeToWhite : MonoBehaviour
     public float FadeRate;
     private Image image;
     private float targetAlpha;
+    public AudioClip warp;
+    private AudioSource AD;
     // Use this for initialization
     void Start () {
         this.image = this.GetComponent<Image>();
@@ -16,6 +18,7 @@ public class FadeToWhite : MonoBehaviour
             Debug.LogError("Error: No image on "+this.name);
         }
         this.targetAlpha = this.image.color.a;
+        AD = GetComponent<AudioSource>();
     }
     
     // Update is called once per frame
@@ -36,6 +39,7 @@ public class FadeToWhite : MonoBehaviour
 
     public void FadeIn()
     {
+        AD.PlayOneShot(warp, 1f);
         this.targetAlpha = 1.0f;
     }
 }

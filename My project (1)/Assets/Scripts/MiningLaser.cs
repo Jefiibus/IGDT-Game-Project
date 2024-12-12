@@ -11,11 +11,12 @@ public class MiningLaser : MonoBehaviour
     private float offsetDistance = 0.51f;
     private float maxDistance = 10f;
     private OreShrink lastHitObject = null;
-
+    private AudioSource AD;
+    public AudioClip laser;
     // Start is called before the first frame update
     void Start()
     {
-        
+        AD = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,10 +25,13 @@ public class MiningLaser : MonoBehaviour
         
         if (Input.GetMouseButton(1))
         {
+            AD.PlayOneShot(laser, 0.05f);
             InvokeRepeating("FireBeam",0,0);
+
         }
         if (Input.GetMouseButtonUp(1))
         {
+            AD.Stop();
             CancelInvoke("FireBeam");
             CancelBeam();
         }
@@ -42,7 +46,9 @@ public class MiningLaser : MonoBehaviour
         //Debug.Log("Firing laser");
         line.enabled = true;
         int layerMask = ~LayerMask.GetMask("Ignore Mining Laser");
-
+        
+        
+        
         line.SetPosition(0, raycastStart);
         RaycastHit2D raycastHit = Physics2D.Raycast(raycastStart, direction, maxDistance, layerMask);
         if (raycastHit)
@@ -93,6 +99,7 @@ public class MiningLaser : MonoBehaviour
 
     public void CancelBeam()
     {
+        
         line.positionCount = 0;
         line.enabled = false;
         if (lastHitObject != null)

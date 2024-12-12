@@ -19,6 +19,9 @@ public class Aim : MonoBehaviour
     private damageable damageableScript;
     private bool gameRestarted = false;
     public TextMeshProUGUI pauseText;
+    private AudioSource AD;
+    public AudioClip fire;
+    public AudioClip ded;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,7 @@ public class Aim : MonoBehaviour
         continueButton = GameObject.Find("ContinueButton");
         pauseMenu.SetActive(false);
         damageableScript = GameObject.Find("Player").GetComponent<damageable>();
+        AD = GetComponent<AudioSource>();
     }
 
 
@@ -61,6 +65,8 @@ public class Aim : MonoBehaviour
         }
         if (damageableScript.IsAlive == false && gameRestarted == false)
         {
+
+            AD.PlayOneShot(ded, 0.5f);
             gameRestarted = true;
             PauseGame();
             continueButton.SetActive(false);
@@ -76,6 +82,7 @@ public class Aim : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
             bullet.transform.Rotate(0, 180f, 0);
             bullet.transform.Translate(Vector3.up);
+            AD.PlayOneShot(fire, 0.5f);
         }
     }
     public void PauseGame()

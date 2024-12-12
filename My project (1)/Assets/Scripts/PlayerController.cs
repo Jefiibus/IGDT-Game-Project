@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     private bool readyToWarp = true;
     private bool sonarReady = true;
     public bool iFrames = true;
+    private AudioSource AD;
+    private damageable damageableScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +38,8 @@ public class PlayerController : MonoBehaviour
         spawnerScript = GameObject.Find("SpawnManager").GetComponent<Spawner>();
         fadeToWhiteScript = GameObject.Find("FadeToWhite").GetComponent<FadeToWhite>();
         currentBackground = backgrounds.Find(bg => bg.activeSelf);
+        AD = GetComponent<AudioSource>();
+        damageableScript = GameObject.Find("Player").GetComponent<damageable>();
     }
     
     
@@ -74,6 +79,11 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(FadeToWhite());
             readyToWarp = false;
         }
+        if (damageableScript.IsAlive == false) 
+        {
+            AD.Stop();
+        }
+        
 
     }
     IEnumerator SonarCooldown()
@@ -155,7 +165,9 @@ public class PlayerController : MonoBehaviour
     }
     public void QuitToMenu()
     {
+        AD.Stop();
         Time.timeScale = 1;
         SceneManager.LoadScene("menu scene");
     }
+
 }
