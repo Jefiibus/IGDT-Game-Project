@@ -6,7 +6,6 @@ using System.IO;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 
 public class LeaderboardManager : MonoBehaviour
