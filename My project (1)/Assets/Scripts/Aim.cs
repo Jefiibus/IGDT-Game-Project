@@ -82,7 +82,7 @@ public class Aim : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
             bullet.transform.Rotate(0, 180f, 0);
             bullet.transform.Translate(Vector3.up);
-            AD.PlayOneShot(fire, 0.5f);
+            AD.PlayOneShot(fire, 0.3f);
         }
     }
     public void PauseGame()
