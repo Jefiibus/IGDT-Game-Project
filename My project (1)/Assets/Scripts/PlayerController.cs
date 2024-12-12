@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private FadeToWhite fadeToWhiteScript;
     public List<GameObject> backgrounds;
     private GameObject currentBackground;
+    private GameObject pauseMenu;
     private bool readyToWarp = true;
     private bool sonarReady = true;
     public bool iFrames = true;
@@ -135,5 +137,24 @@ public class PlayerController : MonoBehaviour
         currentBackground.SetActive(false);
         newBackground.SetActive(true);
         currentBackground = newBackground;
+    }
+    public void RestartButton()
+    {
+        StartCoroutine(RestartGame());
+    }
+    IEnumerator RestartGame()
+    {
+        pauseMenu = GameObject.Find("PauseMenu");
+        pauseMenu.SetActive(false);
+        iFrames = false;
+        Time.timeScale = 1;
+        fadeToWhiteScript.FadeIn();
+        yield return new WaitForSecondsRealtime(1);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+    public void QuitToMenu()
+    {
+        SceneManager.LoadScene("menu scene");
     }
 }
