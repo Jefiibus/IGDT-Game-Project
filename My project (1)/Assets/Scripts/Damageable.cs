@@ -7,10 +7,14 @@ using TMPro;
 public class damageable : MonoBehaviour
 {
     public TextMeshProUGUI healthText;
+    private GameObject player;
     public int _health = 3;
     void Start()
         {
-            healthText.text = "Health: " + _health;
+            player = GameObject.Find("Player");
+            if (gameObject == player){
+                healthText.text = "Health: " + _health;
+            }
         }
     // returns Health
     public int Health
@@ -69,7 +73,10 @@ public class damageable : MonoBehaviour
         {
             Health -= damage;
             isInvincible = true;
-            healthText.text = "Health: " + _health;
+            if (gameObject == player)
+            {
+                healthText.text = "Health: " + _health;
+            }
         }
     }
 }

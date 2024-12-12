@@ -2731,6 +2731,7 @@ MonoBehaviour:
   playerCam: {fileID: 519420031}
   rotation: 0
   paused: 0
+  pauseText: {fileID: 568348272}
 --- !u!212 &1852576516
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
-
+using UnityEngine.UI;
+using TMPro;
 
 public class Aim : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Aim : MonoBehaviour
     private GameObject pauseMenu;
     private GameObject continueButton;
     private damageable damageableScript;
+    private bool gameRestarted = false;
+    public TextMeshProUGUI pauseText;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,10 +59,12 @@ public class Aim : MonoBehaviour
                 CancelInvoke("Fire");
             }
         }
-        if (damageableScript.IsAlive == false)
+        if (damageableScript.IsAlive == false && gameRestarted == false)
         {
+            gameRestarted = true;
             PauseGame();
             continueButton.SetActive(false);
+            pauseText.text = "Game Over";
         }
     }
 

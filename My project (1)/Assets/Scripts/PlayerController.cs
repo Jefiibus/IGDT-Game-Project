@@ -155,6 +155,7 @@ public class PlayerController : MonoBehaviour
     }
     public void QuitToMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("menu scene");
     }
 }
