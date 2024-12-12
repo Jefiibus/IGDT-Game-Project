@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class Aim : MonoBehaviour
 {
@@ -14,6 +17,8 @@ public class Aim : MonoBehaviour
     public Camera playerCam;
     public float rotation;
     public bool paused = false;
+    private PlayerController playerControllerScript;
+    private LeaderboardManager leaderboardManagerScript;
     private GameObject pauseMenu;
     private GameObject continueButton;
     private damageable damageableScript;
@@ -25,6 +30,8 @@ public class Aim : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        leaderboardManagerScript = GameObject.Find("LeaderboardManager").GetComponent<LeaderboardManager>();
+        playerControllerScript = GameObject.Find("PlayerObject").GetOrAddComponent<PlayerController>();
         pauseMenu = GameObject.Find("PauseMenu");
         continueButton = GameObject.Find("ContinueButton");
         pauseMenu.SetActive(false);
@@ -71,6 +78,8 @@ public class Aim : MonoBehaviour
             PauseGame();
             continueButton.SetActive(false);
             pauseText.text = "Game Over";
+            leaderboardManagerScript.ShowUsernamePrompt();
+
         }
     }
 
