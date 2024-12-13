@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+
         if (Input.GetKey(up))
         {
             transform.Translate(Vector2.up * Time.deltaTime * speed);
@@ -162,6 +163,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+        fadeToWhiteScript.FadeOut();
     }
     public void QuitToMenu()
     {

@@ -13,7 +13,6 @@ public class MiningLaser : MonoBehaviour
     private OreShrink lastHitObject = null;
     private AudioSource AD;
     public AudioClip laser;
-    private float cooldown = 0;
     public bool isfiring = false;
     // Start is called before the first frame update
     void Start()
@@ -37,7 +36,6 @@ public class MiningLaser : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             isfiring = false;
-            AD.Stop();
             CancelInvoke("FireBeam");
             CancelBeam();
         }

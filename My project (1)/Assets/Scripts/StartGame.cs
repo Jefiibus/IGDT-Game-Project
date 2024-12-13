@@ -12,6 +12,7 @@ public class StartGame : MonoBehaviour
     private FadeToWhite fadeToWhiteScript;
     private GameObject image;
     public GameObject controls;
+    public GameObject Credits;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class StartGame : MonoBehaviour
         fadeToWhiteScript.FadeIn();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("SampleScene");
+        
     }
     // Call this method to quit the game
     public void QuitGame()
@@ -46,9 +48,15 @@ public class StartGame : MonoBehaviour
         startScreenUI.SetActive(false);
         controls.SetActive(true);
     }
+    public void credits()
+    {
+        Credits.SetActive(true);
+        startScreenUI.SetActive(false);
+    }
     public void Return()
     {
         controls.SetActive(false);
+        Credits.SetActive(false);
         startScreenUI.SetActive(true);
     }
 }

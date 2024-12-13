@@ -7,7 +7,7 @@ public class FadeToWhite : MonoBehaviour
 {
     public float FadeRate;
     private Image image;
-    private float targetAlpha;
+    public float targetAlpha;
     public AudioClip warp;
     private AudioSource AD;
     // Use this for initialization
@@ -19,6 +19,7 @@ public class FadeToWhite : MonoBehaviour
         }
         this.targetAlpha = this.image.color.a;
         AD = GetComponent<AudioSource>();
+        FadeOut();
     }
     
     // Update is called once per frame

@@ -3569,6 +3569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FadeRate: 5
+  targetAlpha: 0
   warp: {fileID: 8300000, guid: 1d2d2c6ff4871c34e93ac457f258b6ee, type: 3}
 --- !u!114 &1562013561
 MonoBehaviour:
@@ -3583,7 +3584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
